@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="bg-info-subtle p-5 rounded-3">
+    <h2 class="mb-4">Registration Form1</h2>
+    <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+      
+      <div class="mb-3">
+        <label for="fullName" class="form-label">Full Name (required):</label>
+        <input type="text" id="fullName" class="form-control" [(ngModel)]="fullName" name="fullName" required>
+        <div class="form-text text-danger" *ngIf="registrationForm.controls.fullName?.errors?.required && registrationForm.controls.fullName?.touched">
+            Please enter your full name.
+          </div>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Gender:</label>
+        <div>
+          <label class="form-check-label me-2">
+            <input type="radio" class="form-check-input" name="gender" [(ngModel)]="gender" value="Male" required> Male
+          </label>
+          <label class="form-check-label me-2">
+            <input type="radio" class="form-check-input" name="gender" [(ngModel)]="gender" value="Female"> Female
+          </label>
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="gender" [(ngModel)]="gender" value="Other"> Other
+          </label>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="country" class="form-label">Country:</label>
+        <select id="country" class="form-select" [(ngModel)]="country" name="country">
+          <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+        </select>
+      </div>
+  
+      <button [disabled]="registrationForm?.invalid" type="submit" class="btn" [ngClass]="{'btn-primary': registrationForm.valid, 'btn-secondary' : registrationForm.invalid}">Submit</button>
+    </form>
+  </div>
+</div>
+  

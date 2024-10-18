@@ -1,0 +1,30 @@
+<div class="container mt-5 ">
+    <div class="bg-info-subtle p-5 rounded-3">
+    <h2 class="mb-4">Registration Form 2</h2>
+    <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+      
+      <div class="mb-3">
+        <label for="name" class="form-label">Name (required):</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="name" name="name" required>
+        <div class="form-text text-danger" *ngIf="registrationForm.controls.name?.errors?.required && registrationForm.controls.name?.touched">
+            Please enter your name.
+          </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="dateOfBirth" class="form-label">Date of Birth (required):</label>
+        <input type="date" id="dateOfBirth" class="form-control" [(ngModel)]="dateOfBirth" name="dateOfBirth" (change)="checkAge()" required>
+        <div class="form-text text-danger" *ngIf="registrationForm.controls.dateOfBirth?.errors?.required && registrationForm.controls.dateOfBirth.touched">Please enter your date of birth.</div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="age" class="form-label">Age:</label>
+        <input type="number" id="age" class="form-control" [(ngModel)]="age" name="age" disabled>
+        <div class="form-text text-danger" *ngIf="age < 18 && registrationForm.controls.dateOfBirth.touched">You must be at least 18 years old.</div>
+      </div>
+  
+      <button [disabled]="registrationForm?.invalid || age < 18" type="submit" class="btn " [ngClass]="{'btn-primary': registrationForm.valid, 'btn-secondary' : registrationForm.invalid || age < 18}">Submit</button>
+    </form>
+  </div>
+</div>
+  
